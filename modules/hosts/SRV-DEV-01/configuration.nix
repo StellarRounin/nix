@@ -5,8 +5,11 @@
 { self, inputs, ... }: {
   flake.nixosModules.srvDev01Configuration = { pkgs, lib, ... }: {
     imports = [
+      self.nixosModules.diskoBase # <-- Importas tu receta genérica
       self.nixosModules.srvDev01Hardware
     ];
+
+    miSistema.discoPrincipal = "/dev/sda";
 
     nix.settings.experimental-features = [
       "nix-command"
@@ -105,9 +108,9 @@
       enable = true;
 
       config = {
-          user.name = "Stellar Rounin";
-          user.email = "stellarrounin@gmail.com";
-        };
+        user.name = "Stellar Rounin";
+        user.email = "stellarrounin@gmail.com";
+      };
     };
 
     programs.zsh.enable = true;
@@ -186,14 +189,14 @@
     # Enable the OpenSSH daemon.
     services.openssh.enable = true;
     programs.ssh = {
-        extraConfig = ''
-          Host github.com
-            HostName github.com
-            User git
-            IdentityFile ~/.ssh/id_ed25519
-            IdentitiesOnly yes
-        '';
-      };
+      extraConfig = ''
+        Host github.com
+          HostName github.com
+          User git
+          IdentityFile ~/.ssh/id_ed25519
+          IdentitiesOnly yes
+      '';
+    };
 
     # Open ports in the firewall.
     # networking.firewall.allowedTCPPorts = [ 1313 ];
