@@ -12,7 +12,7 @@
       disko.devices = {
         disk = {
           main = {
-            device = "/dev/disk/by-id/some-disk-id";
+            device = config.miSistema.discoPrincipal;;
             type = "disk";
 
             content = {
