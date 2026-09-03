@@ -15,12 +15,16 @@
         disk = {
           main = {
             type = "disk";
-            device = config.miSistema.discoPrincipal;
+            device = "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_250GB_S21PNXAGB12345";
             content = {
               type = "gpt";
               partitions = {
+                boot = {
+                  size = "1M";
+                  type = "EF02"; # for grub MBR
+                };
                 ESP = {
-                  end = "500M";
+                  size = "512M";
                   type = "EF00";
                   content = {
                     type = "filesystem";
@@ -30,8 +34,7 @@
                   };
                 };
                 root = {
-                  name = "root";
-                  end = "-0";
+                  size = "100%";
                   content = {
                     type = "filesystem";
                     format = "ext4";
