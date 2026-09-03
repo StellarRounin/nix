@@ -91,7 +91,6 @@
     users.users."stellarrounin" = {
       isNormalUser = true;
       description = "stellarrounin";
-      initialHashedPassword = "REMOVED";
       extraGroups = [
         "networkmanager"
         "wheel"
